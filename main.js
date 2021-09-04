@@ -1,8 +1,13 @@
 const { Client, Intents, MessageEmbed, Role } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],});
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],});
 
-const ruleClaim = require('./rule-claiming')
-const faqClaim = require('./faq-claiming')
+const ruleClaim = require('./embeds/rule-claiming')
+const faqClaim = require('./embeds/faq-claiming')
+
+const featureEmbed = require('./embeds/embed-features')
+const statusEmbed = require('./embeds/embed-status')
+const loaderEmbed = require('./embeds/embed-loader')
+
 const welcomeMsg = require('./welcome-message')
 
 const tokenKey = require('./token')
@@ -14,23 +19,16 @@ client.once('ready', () => {
     faqClaim(client)
     welcomeMsg(client)
 
+    featureEmbed(client)
+    statusEmbed(client)
+    loaderEmbed(client)
 })
 
-client.on('guildMemberAdd', member => {
-    console.log("New member joined");
-
-    /*
-    //Add pesant role on join
-    member.roles.add(member.cache.get(member.id).roles.add('872538157801963610'))
-
-    //msg when join
-    let msg = channel.message.send('Yo welcome' + member.name)
-    msg.react('💦')
-    */
-})
-
-client.on('guildMemberRemove', member => {
-    console.log("Member left");
+client.on('message', async msg =>{
+    if(msg.content === "ping"){
+        let messageEmbed = await msg.reply('pong');
+        messageEmbed.react('👌');
+    }
 })
 
 

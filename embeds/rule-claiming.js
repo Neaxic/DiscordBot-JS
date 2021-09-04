@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const firstMessage = require('./first-message')
+const firstMessage = require('../first-message')
 
 const rulesEmbed = new MessageEmbed()
     .setColor('#ff0000')
