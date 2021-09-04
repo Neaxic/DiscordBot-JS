@@ -5,6 +5,8 @@ const ruleClaim = require('./rule-claiming')
 const faqClaim = require('./faq-claiming')
 const welcomeMsg = require('./welcome-message')
 
+const tokenKey = require('./token')
+
 client.once('ready', () => {
     console.log("Bot-man is online");
 
@@ -62,4 +64,4 @@ client.on('messageReactionRemove', async (reaction, user) => {
 */
 
 client.emit()
-client.login('ODgzMDU2Njk1ODkzNDI2MTc2.YTEYog.VGPlbLkL846TjY9VbkJbM5dQBmY');
+client.login(tokenKey.token);
