@@ -14,23 +14,14 @@ module.exports = (client) => {
                 
                 channel.permissionOverwrites.create(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
 
-                channel.permissionOverwrites.set([{
-                    id: channel.guild.roles.everyone,
-                    deny: [Permissions.FLAGS.SEND_MESSAGES],
-                },
-                {
-                    id: msg.author,
-                    allow: [Permissions.FLAGS.VIEW_CHANNEL],
-                },
-            ])
-
-                /*
-                channel.permissionOverwrites.edit(msg.author, {
-                    SEND_MESSAGE: true,
+                channel.permissionOverwrites.edit(msg.author, [{
                     VIEW_CHANNEL: true
-                })
+                }, {
+                    SEND_MESSAGES: true
+                }])
+                .then(channel => console.log(channel.permissionOverwrites.cache.get(msg.author.id)))
+                .catch(console.error);
 
-                */
                 const reactionMessage = await channel.send('Thank your for creating');
                 
                 try {
@@ -49,11 +40,13 @@ module.exports = (client) => {
                 collector.on('collect', (reaction, user) => {
                     switch(reaction.emoji.name){
                         case '🔒':
+                            if(user.bot) return;
                             /*channel.permissionOverwrites.create(message.author, {
                                 SEND_MESSAGE: false
                             })*/
                             break;
                         case '🚫':
+                            if(user.bot) return;
                             channel.send('Deleting this channel in 5 secounds!')
                             setTimeout(() => channel.delete(), 5000);
                             break;
@@ -85,6 +78,5 @@ module.exports = (client) => {
         console.log("Member left");
     })*/
 
-    
     
 }
