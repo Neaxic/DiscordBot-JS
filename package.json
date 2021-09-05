@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^13.1.0"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
   }
 }
