@@ -31,7 +31,6 @@ module.exports = (client) => {
                         if(reaction.emoji.name === '🚫'){
                             channel.send('Deleting this channel in 5 secounds!')
                             setTimeout(() => channel.delete(), 5000);
-                            break;
                         }
                     }
                 })
