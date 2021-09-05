@@ -29,7 +29,6 @@ module.exports = (client) => {
                     await reactionMessage.react('🚫')
                 } catch (err){
                     channel.send('Error sending reactions');
-                    throw err;
                 }
 
                 
