@@ -1,7 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 const { Permissions } = require('discord.js');
+const firstMessage = require('../first-message')
 
-const faqEmbed = new MessageEmbed()
+const setupTicketEmbed = new MessageEmbed()
     .setColor('#FF0000')
     .setTitle('𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET SYSTEM') 
     .setDescription('React with the 🎟️ emoji, and a room will be created for you and the staff team.')
@@ -10,7 +11,7 @@ module.exports = (client) => {
     const channelId = '884189059029819432'
     const ticketParrent = '883867456056201228'
     const reactions = ['🎟️']
-    firstMessage(client, channelId, faqEmbed, reactions)
+    firstMessage(client, channelId, setupTicketEmbed, reactions)
 
     client.on('messageReactionAdd', async (reaction, user) => {
         if(reaction.message.channel.id === channelId){
