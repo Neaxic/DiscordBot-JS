@@ -3,12 +3,14 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 const ruleClaim = require('./embeds/rule-claiming')
 const faqClaim = require('./embeds/faq-claiming')
-
-const featureEmbed = require('./embeds/embed-features')
-const statusEmbed = require('./embeds/embed-status')
-const loaderEmbed = require('./embeds/embed-loader')
+const featureEmbed = require('./embeds/features')
+const statusEmbed = require('./embeds/status')
+const loaderEmbed = require('./embeds/loader')
+const exclusiveEmbed = require('./embeds/exclusive')
 
 const welcomeMsg = require('./welcome-message')
+
+const ticket = require('./commands/ticket')
 
 const tokenKey = require('./token')
 
@@ -22,6 +24,10 @@ client.once('ready', () => {
     featureEmbed(client)
     statusEmbed(client)
     loaderEmbed(client)
+    exclusiveEmbed(client)
+
+    ticket(client)
+
 })
 
 client.on('message', async msg =>{
