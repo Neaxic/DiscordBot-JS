@@ -24,34 +24,17 @@ module.exports = (client) => {
 
                 const reactionMessage = await channel.send('Thank your for creating');
                 
-                try {
-                    await reactionMessage.react('🔒')
-                    await reactionMessage.react('🚫')
-                } catch (err){
-                    channel.send('Error sending reactions');
-                }
-
+                client.on('messageReactionAdd', async (reaction, user) => {
+                    if(reaction.message.channel.id === channelId){
+                        if(user.bot) return;
                 
-                const collector = reactionMessage.createReactionCollector((reaction, user) =>
-                message.guild.members.cache.find((member) => member.id === user.id).hasPermission('ADMINISTRATOR'),
-                { dispose: true });
-
-                collector.on('collect', (reaction, user) => {
-                    switch(reaction.emoji.name){
-                        case '🔒':
-                            if(user.bot) return;
-                            /*channel.permissionOverwrites.create(message.author, {
-                                SEND_MESSAGE: false
-                            })*/
-                            break;
-                        case '🚫':
-                            if(user.bot) return;
+                        if(reaction.emoji.name === '🚫'){
                             channel.send('Deleting this channel in 5 secounds!')
                             setTimeout(() => channel.delete(), 5000);
                             break;
+                        }
                     }
-                });
-                
+                })
             }
         }
     })
