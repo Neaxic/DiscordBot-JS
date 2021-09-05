@@ -12,7 +12,7 @@ const welcomeMsg = require('./welcome-message')
 
 const ticket = require('./commands/ticket')
 
-const tokenKey = process.env.HerokuToken
+//const tokenKey = require('./token')
 
 client.once('ready', () => {
     console.log("Bot-man is online");
@@ -68,4 +68,4 @@ client.on('messageReactionRemove', async (reaction, user) => {
 */
 
 client.emit()
-client.login(tokenKey.token);
+client.login(process.env.HerokuToken);
