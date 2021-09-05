@@ -18,19 +18,17 @@ module.exports = (client) => {
             if(user.bot) return;
     
             if(reaction.emoji.name === '🎟️'){
-                msg.react('👌')
-
-                const channel = await msg.guild.channels.create(`ticket: ${msg.author.tag}`);
+                const channel = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
                 channel.setParent(ticketParrent)
                 
                 channel.permissionOverwrites.create(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
 
-                channel.permissionOverwrites.edit(msg.author, [{
+                channel.permissionOverwrites.edit(user.tag, [{
                     VIEW_CHANNEL: true
                 }, {
                     SEND_MESSAGES: true
                 }])
-                .then(channel => console.log(channel.permissionOverwrites.cache.get(msg.author.id)))
+                .then(channel => console.log(channel.permissionOverwrites.cache.get(user.id)))
                 .catch(console.error);
 
                 const reactionMessage = await channel.send('Thank your for creating');
