@@ -19,8 +19,6 @@ module.exports = (client) => {
                 }, {
                     SEND_MESSAGES: true
                 }])
-                .then(channel => console.log(channel.permissionOverwrites.cache.get(msg.author.id)))
-                .catch(console.error);
 
                 const reactionMessage = await channel.send('Thank your for creating');
                 
