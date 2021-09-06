@@ -57,9 +57,10 @@ module.exports = (client) => {
                         case '🚫':
                             if(user.bot) return;
 
-                            channel.send('Are you sure you want to delete this ticket?').then(msg => 
-                                msg.react('🟩'),
-                                msg.react('🟥'))
+                            channel.send('Are you sure you want to delete this ticket?').then(msg => {
+                                msg.react('🟩')
+                                msg.react('🟥')
+                            })
                             break;
                     }
                 });
