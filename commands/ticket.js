@@ -18,6 +18,17 @@ module.exports = (client) => {
             if(user.bot) return;
     
             if(reaction.emoji.name === '🎟️'){
+                
+                const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
+
+            try {
+	            for (const reaction of userReactions.values()) {
+		            await reaction.users.remove(user.id);
+	            }
+            } catch (error) {
+	            console.error('Failed to remove reactions.');
+            }
+
                 const channel = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
                 channel.setParent(ticketParrent)
                 
