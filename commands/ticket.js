@@ -57,9 +57,9 @@ module.exports = (client) => {
                         case '🚫':
                             if(user.bot) return;
 
-                            const confirmClose = await channel.send('Are you sure you want to delete this ticket?')
-                            confirmClose.react('🟩')
-                            confirmClose.react('🟥')
+                            channel.send('Are you sure you want to delete this ticket?').then(msg => 
+                                msg.react('🟩'),
+                                msg.react('🟥'))
                             break;
                     }
                 });
