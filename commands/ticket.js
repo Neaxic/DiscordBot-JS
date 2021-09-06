@@ -43,7 +43,7 @@ module.exports = (client) => {
                 }
 
                 const collector = reactionMessage.createReactionCollector((reaction, user) =>
-                message.guild.members.cache.find((member) => member.id === user.id).hasPermission('ADMINISTRATOR'),
+                message.guild.members.cache.find((member) => member.id === user.id).hasPermission('MODERATOR'),
                 { dispose: true });
 
                 collector.on('collect', (reaction, user) => {
@@ -65,22 +65,10 @@ module.exports = (client) => {
                     }
                 });
             }
-        }
-    })
-
-    client.on('messageReactionAdd', async (reaction, user) => {
-        if(user.bot) return;
-        if(reaction.message.channel.id === channelId){
             if(reaction.emoji.name === '🟩'){
                 channel.send('Deleting this channel in 5 secounds!')
                 setTimeout(() => channel.delete(), 5000);
             }
-        }
-    })
-
-    client.on('messageReactionAdd', async (reaction, user) => {
-        if(user.bot) return;
-        if(reaction.message.channel.id === channelId){
             if(reaction.emoji.name === '🟥'){
                 reaction.message.reactions.cache.get('🟥').remove()
                 reaction.message.reactions.cache.get('🟩').remove()
