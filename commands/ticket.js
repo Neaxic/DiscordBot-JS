@@ -8,7 +8,7 @@ const setupTicketEmbed = new MessageEmbed()
     .setDescription('React with the 🎟️ emoji, and a room will be created for you and the staff team.')
 
 module.exports = (client) => {
-    const channelId = '884189059029819432'
+    const channelId = '883873847663796305'
     const ticketParrent = '883867456056201228'
     const reactions = ['🎟️']
     firstMessage(client, channelId, setupTicketEmbed, reactions)
@@ -18,17 +18,8 @@ module.exports = (client) => {
             if(user.bot) return;
     
             if(reaction.emoji.name === '🎟️'){
+                reaction.users.remove(user)    
                 
-                const userReactions = message.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
-
-            try {
-	            for (const reaction of userReactions.values()) {
-		            await reaction.users.remove(user.id);
-	            }
-            } catch (error) {
-	            console.error('Failed to remove reactions.');
-            }
-
                 const channel = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
                 channel.setParent(ticketParrent)
                 
@@ -65,11 +56,34 @@ module.exports = (client) => {
                             break;
                         case '🚫':
                             if(user.bot) return;
-                            channel.send('Deleting this channel in 5 secounds!')
-                            setTimeout(() => channel.delete(), 5000);
+
+                            const confirmClose = await channel.send('Are you sure you want to delete this ticket?')
+                            confirmClose.react('🟩')
+                            confirmClose.react('🟥')
                             break;
                     }
                 });
+            }
+        }
+    })
+
+    client.on('messageReactionAdd', async (reaction, user) => {
+        if(user.bot) return;
+        if(reaction.message.channel.id === channelId){
+            if(reaction.emoji.name === '🟩'){
+                channel.send('Deleting this channel in 5 secounds!')
+                setTimeout(() => channel.delete(), 5000);
+                break;
+            }
+        }
+    })
+
+    client.on('messageReactionAdd', async (reaction, user) => {
+        if(user.bot) return;
+        if(reaction.message.channel.id === channelId){
+            if(reaction.emoji.name === '🟥'){
+                reaction.message.reactions.cache.get('🟥').remove()
+                reaction.message.reactions.cache.get('🟩').remove()
             }
         }
     })
