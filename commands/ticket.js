@@ -7,11 +7,6 @@ const setupTicketEmbed = new MessageEmbed()
     .setTitle('𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET SYSTEM') 
     .setDescription('React with the 🎟️ emoji, and a room will be created for you and the staff team.')
 
-var ticketMessage = new MessageEmbed()
-    .setColor('#FF0000')
-    .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
-    .setDescription(`TICKET CREATED: ${timestamp.getDate()}`)
-
 module.exports = (client) => {
     const channelId = '883873847663796305'
     const ticketParrent = '883867456056201228'
@@ -22,6 +17,11 @@ module.exports = (client) => {
 
     var ticketroom;
     var timestamp;
+
+    var ticketMessage = new MessageEmbed()
+    .setColor('#FF0000')
+    .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
+    .setDescription(`TICKET CREATED: ${timestamp.getDate()}`)
 
     firstMessage(client, channelId, setupTicketEmbed, reactions)
 
