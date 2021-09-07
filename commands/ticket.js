@@ -75,8 +75,8 @@ module.exports = (client) => {
         if(reaction.emoji.name === '🟩'){
             if(!reaction.message.channel.id === ticketroom.id) return;
             if(user.bot) return;
-            channel.send('Deleting this channel in 5 secounds!')
-            setTimeout(() => channel.delete(), 5000);
+            ticketroom.send('Deleting this channel in 5 secounds!')
+            setTimeout(() => ticketroom.delete(), 5000);
         }
         if(reaction.emoji.name === '🟥'){
             if(!reaction.message.channel.id === ticketroom.id) return;
