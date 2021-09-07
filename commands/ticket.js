@@ -73,13 +73,13 @@ module.exports = (client) => {
             }
         }
         if(reaction.emoji.name === '🟩'){
-            if(!reaction.channel.id === ticketroom.id) return;
+            if(!reaction.message.channel.id === ticketroom.id) return;
             if(user.bot) return;
             channel.send('Deleting this channel in 5 secounds!')
             setTimeout(() => channel.delete(), 5000);
         }
         if(reaction.emoji.name === '🟥'){
-            if(!reaction.channel.id === ticketroom.id) return;
+            if(!reaction.message.channel.id === ticketroom.id) return;
             if(user.bot) return;
             reaction.message.reactions.cache.get('🟥').remove()
             reaction.message.reactions.cache.get('🟩').remove()
