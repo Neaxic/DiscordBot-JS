@@ -18,10 +18,6 @@ module.exports = (client) => {
     var ticketroom;
     var timestamp;
 
-    var ticketMessage = new MessageEmbed()
-    .setColor('#FF0000')
-    .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
-    .setDescription(`TICKET CREATED: ${timestamp.getDate()}`)
 
     firstMessage(client, channelId, setupTicketEmbed, reactions)
 
@@ -46,6 +42,11 @@ module.exports = (client) => {
                 }])
                 .then(ticketroom => console.log(ticketroom.permissionOverwrites.cache.get(user.id)))
                 .catch(console.error);
+
+                var ticketMessage = new MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
+                .setDescription(`TICKET CREATED: ${timestamp.getDate()}`)
 
                 const reactionMessage = await ticketroom.send({embeds: [ticketMessage]});
                 
