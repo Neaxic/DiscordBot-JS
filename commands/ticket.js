@@ -11,6 +11,12 @@ module.exports = (client) => {
     const channelId = '883873847663796305'
     const ticketParrent = '883867456056201228'
     const reactions = ['🎟️']
+
+    const ticketReact = '🔒'
+    const ticketReact2 = '🚪'
+
+    const ticketroom;
+
     firstMessage(client, channelId, setupTicketEmbed, reactions)
 
     client.on('messageReactionAdd', async (reaction, user) => {
@@ -20,24 +26,24 @@ module.exports = (client) => {
             if(reaction.emoji.name === '🎟️'){
                 reaction.users.remove(user)    
                 
-                const channel = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
-                channel.setParent(ticketParrent)
+                ticketroom = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
+                ticketroom.setParent(ticketParrent)
                 
-                channel.permissionOverwrites.create(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
+                ticketroom.permissionOverwrites.create(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
 
-                channel.permissionOverwrites.edit(user.tag, [{
+                ticketroom.permissionOverwrites.edit(user.tag, [{
                     VIEW_CHANNEL: true
                 }, {
                     SEND_MESSAGES: true
                 }])
-                .then(channel => console.log(channel.permissionOverwrites.cache.get(user.id)))
+                .then(ticketroom => console.log(ticketroom.permissionOverwrites.cache.get(user.id)))
                 .catch(console.error);
 
-                const reactionMessage = await channel.send('Thank your for creating');
+                const reactionMessage = await ticketroom.send('Thank your for creating');
                 
                 try {
-                    await reactionMessage.react('🔒')
-                    await reactionMessage.react('🚫')
+                    await reactionMessage.react(ticketReact)
+                    await reactionMessage.react(ticketReact2)
                 } catch (err){
                     channel.send('Error sending reactions');
                 }
@@ -48,16 +54,16 @@ module.exports = (client) => {
 
                 collector.on('collect', (reaction, user) => {
                     switch(reaction.emoji.name){
-                        case '🔒':
+                        case ticketReact:
                             if(user.bot) return;
                             /*channel.permissionOverwrites.create(message.author, {
                                 SEND_MESSAGE: false
                             })*/
                             break;
-                        case '🚫':
+                        case ticketReact2:
                             if(user.bot) return;
 
-                            channel.send('Are you sure you want to delete this ticket?').then(msg => {
+                            ticketroom.send('Are you sure you want to delete this ticket?').then(msg => {
                                 msg.react('🟩')
                                 msg.react('🟥')
                             })
@@ -65,14 +71,18 @@ module.exports = (client) => {
                     }
                 });
             }
-            if(reaction.emoji.name === '🟩'){
-                channel.send('Deleting this channel in 5 secounds!')
-                setTimeout(() => channel.delete(), 5000);
-            }
-            if(reaction.emoji.name === '🟥'){
-                reaction.message.reactions.cache.get('🟥').remove()
-                reaction.message.reactions.cache.get('🟩').remove()
-            }
+        }
+        if(reaction.emoji.name === '🟩'){
+            if(!reaction.channel.id === ticketroom.id) return;
+            if(user.bot) return;
+            channel.send('Deleting this channel in 5 secounds!')
+            setTimeout(() => channel.delete(), 5000);
+        }
+        if(reaction.emoji.name === '🟥'){
+            if(!reaction.channel.id === ticketroom.id) return;
+            if(user.bot) return;
+            reaction.message.reactions.cache.get('🟥').remove()
+            reaction.message.reactions.cache.get('🟩').remove()
         }
     })
 
