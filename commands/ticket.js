@@ -32,7 +32,7 @@ module.exports = (client) => {
                 ticketroom = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
                 ticketroom.setParent(ticketParrent)
 
-                timestamp = new Date();
+                timestamp = Date();
                 
                 ticketroom.permissionOverwrites.create(ticketroom.guild.roles.everyone, { VIEW_CHANNEL: false });
 
@@ -47,8 +47,7 @@ module.exports = (client) => {
                 var ticketMessage = new MessageEmbed()
                 .setColor('#FF0000')
                 .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
-                .setDescription(`TICKET CREATED ON: ${timestamp.getMonth()}, ${timestamp.getDate()}, ${timestamp.getFullYear()}. \n
-                AT EXCATLY: ${timestamp.getHours()}, ${timestamp.getMinutes}, ${timestamp.getSeconds}.`)
+                .setDescription(`TICKET CREATED ON: ${timestamp}`)
 
                 const reactionMessage = await ticketroom.send({embeds: [ticketMessage]});
                 
