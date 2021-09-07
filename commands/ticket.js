@@ -7,7 +7,7 @@ const setupTicketEmbed = new MessageEmbed()
     .setTitle('𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET SYSTEM') 
     .setDescription('React with the 🎟️ emoji, and a room will be created for you and the staff team.')
 
-const ticketMessage = new MessageEmbed()
+var ticketMessage = new MessageEmbed()
     .setColor('#FF0000')
     .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
     .setDescription(`TICKET CREATED: ${timestamp.getDate()}`)
