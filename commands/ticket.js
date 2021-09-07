@@ -7,6 +7,11 @@ const setupTicketEmbed = new MessageEmbed()
     .setTitle('𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET SYSTEM') 
     .setDescription('React with the 🎟️ emoji, and a room will be created for you and the staff team.')
 
+const ticketMessage = new MessageEmbed()
+    .setColor('#FF0000')
+    .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
+    .setDescription(`TICKET CREATED: ${timestamp.getDate()}`)
+
 module.exports = (client) => {
     const channelId = '883873847663796305'
     const ticketParrent = '883867456056201228'
@@ -16,6 +21,7 @@ module.exports = (client) => {
     const ticketReact2 = '🚪'
 
     var ticketroom;
+    var timestamp;
 
     firstMessage(client, channelId, setupTicketEmbed, reactions)
 
@@ -28,6 +34,8 @@ module.exports = (client) => {
                 
                 ticketroom = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
                 ticketroom.setParent(ticketParrent)
+
+                timestamp = Date.now();
                 
                 ticketroom.permissionOverwrites.create(ticketroom.guild.roles.everyone, { VIEW_CHANNEL: false });
 
@@ -39,7 +47,7 @@ module.exports = (client) => {
                 .then(ticketroom => console.log(ticketroom.permissionOverwrites.cache.get(user.id)))
                 .catch(console.error);
 
-                const reactionMessage = await ticketroom.send('Thank your for creating');
+                const reactionMessage = await ticketroom.send({embeds: [ticketMessage]});
                 
                 try {
                     await reactionMessage.react(ticketReact)
@@ -62,6 +70,7 @@ module.exports = (client) => {
                             break;
                         case ticketReact2:
                             if(user.bot) return;
+                            reaction.users.remove(user)  
 
                             ticketroom.send('Are you sure you want to delete this ticket?').then(msg => {
                                 msg.react('🟩')
@@ -81,6 +90,7 @@ module.exports = (client) => {
         if(reaction.emoji.name === '🟥'){
             if(!reaction.message.channel.id === ticketroom.id) return;
             if(user.bot) return;
+            reaction.message.remove()
             reaction.message.reactions.cache.get('🟥').remove()
             reaction.message.reactions.cache.get('🟩').remove()
         }
