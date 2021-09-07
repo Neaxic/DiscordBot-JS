@@ -48,7 +48,7 @@ module.exports = (client) => {
                 .setColor('#FF0000')
                 .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
                 .setDescription(`TICKET CREATED ON: ${timestamp.getMonth()}, ${timestamp.getDate()}, ${timestamp.getFullYear()}. \n
-                AT EXCATLY: ${timestamp.getHours()}:${timestamp.getMinutes}:${timestamp.getSeconds}.`)
+                AT EXCATLY: ${timestamp.getHours()}, ${timestamp.getMinutes}, ${timestamp.getSeconds}.`)
 
                 const reactionMessage = await ticketroom.send({embeds: [ticketMessage]});
                 
