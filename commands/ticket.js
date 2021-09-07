@@ -15,7 +15,7 @@ module.exports = (client) => {
     const ticketReact = '🔒'
     const ticketReact2 = '🚪'
 
-    const ticketroom;
+    var ticketroom;
 
     firstMessage(client, channelId, setupTicketEmbed, reactions)
 
