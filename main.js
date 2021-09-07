@@ -31,7 +31,7 @@ client.once('ready', () => {
 })
 
 client.on('message', async msg =>{
-    if(msg.content === "ping"){
+    if(msg.content === ".ping"){
         let messageEmbed = await msg.reply('pong');
         messageEmbed.react('👌');
     }

@@ -29,7 +29,7 @@ module.exports = (client) => {
                 ticketroom = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
                 ticketroom.setParent(ticketParrent)
                 
-                ticketroom.permissionOverwrites.create(channel.guild.roles.everyone, { VIEW_CHANNEL: false });
+                ticketroom.permissionOverwrites.create(ticketroom.guild.roles.everyone, { VIEW_CHANNEL: false });
 
                 ticketroom.permissionOverwrites.edit(user.tag, [{
                     VIEW_CHANNEL: true
