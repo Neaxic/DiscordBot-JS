@@ -4,7 +4,7 @@ const firstMessage = require('../first-message')
 
 const setupTicketEmbed = new MessageEmbed()
     .setColor('#FF0000')
-    .setTitle('𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET SYSTEM') 
+    .setTitle('𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET SYSTEM')
     .setDescription('React with the 🎟️ emoji, and a room will be created for you and the staff team.')
 
 module.exports = (client) => {
@@ -23,17 +23,17 @@ module.exports = (client) => {
     firstMessage(client, channelId, setupTicketEmbed, reactions)
 
     client.on('messageReactionAdd', async (reaction, user) => {
-        if(reaction.message.channel.id === channelId){
-            if(user.bot) return;
-    
-            if(reaction.emoji.name === '🎟️'){
-                reaction.users.remove(user)    
-                
+        if (reaction.message.channel.id === channelId) {
+            if (user.bot) return;
+
+            if (reaction.emoji.name === '🎟️') {
+                reaction.users.remove(user)
+
                 ticketroom = await reaction.message.guild.channels.create(`ticket: ${user.tag}`);
                 ticketroom.setParent(ticketParrent)
 
                 timestamp = Date();
-                
+
                 ticketroom.permissionOverwrites.create(ticketroom.guild.roles.everyone, { VIEW_CHANNEL: false });
 
                 ticketroom.permissionOverwrites.edit(user.tag, [{
@@ -41,38 +41,38 @@ module.exports = (client) => {
                 }, {
                     SEND_MESSAGES: true
                 }])
-                .then(ticketroom => console.log(ticketroom.permissionOverwrites.cache.get(user.id)))
-                .catch(console.error);
+                    .then(ticketroom => console.log(ticketroom.permissionOverwrites.cache.get(user.id)))
+                    .catch(console.error);
 
                 var ticketMessage = new MessageEmbed()
-                .setColor('#FF0000')
-                .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
-                .setDescription(`TICKET CREATED ON: ${timestamp}`)
+                    .setColor('#FF0000')
+                    .setTitle(`𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 TICKET ID: ${ticketroom.id}`)
+                    .setDescription(`TICKET CREATED ON: ${timestamp}`)
 
-                const reactionMessage = await ticketroom.send({embeds: [ticketMessage]});
-                
+                const reactionMessage = await ticketroom.send({ embeds: [ticketMessage] });
+
                 try {
                     await reactionMessage.react(ticketReact)
                     await reactionMessage.react(ticketReact2)
-                } catch (err){
+                } catch (err) {
                     channel.send('Error sending reactions');
                 }
 
                 const collector = reactionMessage.createReactionCollector((reaction, user) =>
-                message.guild.members.cache.find((member) => member.id === user.id).hasPermission('MODERATOR'),
-                { dispose: true });
+                    message.guild.members.cache.find((member) => member.id === user.id).hasPermission('MODERATOR'),
+                    { dispose: true });
 
                 collector.on('collect', (reaction, user) => {
-                    switch(reaction.emoji.name){
+                    switch (reaction.emoji.name) {
                         case ticketReact:
-                            if(user.bot) return;
+                            if (user.bot) return;
                             /*channel.permissionOverwrites.create(message.author, {
                                 SEND_MESSAGE: false
                             })*/
                             break;
                         case ticketReact2:
-                            if(user.bot) return;
-                            reaction.users.remove(user)  
+                            if (user.bot) return;
+                            reaction.users.remove(user)
 
                             ticketroom.send('Are you sure you want to delete this ticket?').then(msg => {
                                 msg.react('🟩')
@@ -83,15 +83,15 @@ module.exports = (client) => {
                 });
             }
         }
-        if(reaction.emoji.name === '🟩'){
-            if(!reaction.message.channel.id === ticketroom.id) return;
-            if(user.bot) return;
+        if (reaction.emoji.name === '🟩') {
+            if (!reaction.message.channel.id === ticketroom.id) return;
+            if (user.bot) return;
             ticketroom.send('Deleting this channel in 5 secounds!')
             setTimeout(() => ticketroom.delete(), 5000);
         }
-        if(reaction.emoji.name === '🟥'){
-            if(!reaction.message.channel.id === ticketroom.id) return;
-            if(user.bot) return;
+        if (reaction.emoji.name === '🟥') {
+            if (!reaction.message.channel.id === ticketroom.id) return;
+            if (user.bot) return;
             reaction.message.remove()
             reaction.message.reactions.cache.get('🟥').remove()
             reaction.message.reactions.cache.get('🟩').remove()
@@ -119,5 +119,5 @@ module.exports = (client) => {
         console.log("Member left");
     })*/
 
-    
+
 }
