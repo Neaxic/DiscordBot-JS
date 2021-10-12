@@ -21,7 +21,7 @@ client.once('ready', () => {
     faqClaim(client)
     welcomeMsg(client)
 
-    featureEmbed(client)
+    //featureEmbed(client)
     statusEmbed(client)
     loaderEmbed(client)
     exclusiveEmbed(client)

@@ -4,16 +4,8 @@ const firstMessage = require('../first-message')
 const faqEmbed = new MessageEmbed()
     .setColor('#FF6E33')
     .setTitle('𝐒𝐈𝐂𝐊𝐎𝐖𝐀𝐑𝐄 CS:GO FEATURES') 
-    .setDescription('THE CURRENT CS:GO (LEGIT) FEATURES \n All visual features are color and thickness customizable!')
+    .setDescription('THE CURRENT CS:GO (LEGIT) FEATURES \n In short we have: Aimbot, Triggerbot, Backtrack, Anti-Aim, Glow, Charms, ESP, Various visuals, Inventory changer, Custom sounds, custom menu, general micellaneous features, and config loading & saving.\nWe used to have a listed version in text, but theres simply too much to cover. - So insted, heres screenshots:')
     .setThumbnail('https://i.pinimg.com/originals/b1/02/24/b10224ae75edd5debd06c44662cbcb30.png')
-
-    .setFields(
-        { name: 'VISUAL FEATURES', value: 'BoundingBoxESP\nCornorBoxESP\nRardarESP\nTracerESP\nSkeletonESP\nPlayer Glow\nHealth & Armor bar\nNo-Flash', inline: true},
-        { name: 'AIMING FEATURES', value: 'Triggerbot\nTriggerbot Delays', inline: true },
-        { name: 'MISC FEATURES', value: 'FOV-Changer\nBhop\nThirdperson', inline: true },
-        { name: '\n new row test', value: 'FOV-Changer\nBhop\nThirdperson', inline: true },
-        { name: 'test', value: 'FOV-Changer\nBhop\nThirdperson', inline: true }
-    )
 
     .setFooter('Hope this helps, otherwise contact staff.');
 
