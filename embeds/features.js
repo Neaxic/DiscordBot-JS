@@ -11,7 +11,7 @@ const faqEmbed = new MessageEmbed()
         { name: 'VISUAL FEATURES', value: 'BoundingBoxESP\nCornorBoxESP\nRardarESP\nTracerESP\nSkeletonESP\nPlayer Glow\nHealth & Armor bar\nNo-Flash', inline: true},
         { name: 'AIMING FEATURES', value: 'Triggerbot\nTriggerbot Delays', inline: true },
         { name: 'MISC FEATURES', value: 'FOV-Changer\nBhop\nThirdperson', inline: true },
-        { name: 'new row test', value: 'FOV-Changer\nBhop\nThirdperson'},
+        { name: '\n new row test', value: 'FOV-Changer\nBhop\nThirdperson', inline: true },
         { name: 'test', value: 'FOV-Changer\nBhop\nThirdperson', inline: true }
     )
 
