@@ -18,7 +18,7 @@ const rulesEmbed = new MessageEmbed()
     )
 
     .setImage('https://media.discordapp.net/attachments/598521974192472075/873677829915701298/standard_1.gif')
-    .setFooter('This is not a shop, its just a comminty that happens to code. \nFuck you, follow the rules.');
+    .setFooter('This is not a shop, its just a community that happens to code. \nFuck you, follow the rules.');
 
 
 
