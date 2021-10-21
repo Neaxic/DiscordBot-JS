@@ -1,5 +1,5 @@
 const { Client, Intents, MessageEmbed, Role } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],});
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS], });
 
 const ruleClaim = require('./embeds/rule-claiming')
 const faqClaim = require('./embeds/faq-claiming')
@@ -11,6 +11,8 @@ const exclusiveEmbed = require('./embeds/exclusive')
 const welcomeMsg = require('./welcome-message')
 
 const ticket = require('./commands/ticket')
+const blacklist = require('./commands/blacklist')
+
 
 //const tokenKey = require('./token')
 
@@ -27,11 +29,12 @@ client.once('ready', () => {
     exclusiveEmbed(client)
 
     ticket(client)
+    blacklist(client)
 
 })
 
-client.on('message', async msg =>{
-    if(msg.content === ".ping"){
+client.on('message', async msg => {
+    if (msg.content === ".ping") {
         let messageEmbed = await msg.reply('pong');
         messageEmbed.react('👌');
     }
