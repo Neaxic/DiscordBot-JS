@@ -23,7 +23,7 @@ client.once('ready', () => {
     console.log("Bot-man is online");
 
     client.channels.cache.get("883827218923528234")
-        .send(`Im somehow alive`)
+        .send(`Im somehow alive - ${Date()}`)
 
     pingCheck(client)
 

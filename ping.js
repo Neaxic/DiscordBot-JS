@@ -4,7 +4,7 @@ module.exports = (client) => {
             msg.react('👌');
             let responseMsg = await msg.reply('... Calculating ...');
             setTimeout(() => {
-                const ping = msg.createdTimestamp - responseMsg.createdTimestamp;
+                var ping = msg.createdTimestamp - responseMsg.createdTimestamp;
                 responseMsg.edit(`Currently: ${ping}`)
             }, 2000)
         }
