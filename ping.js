@@ -5,7 +5,7 @@ module.exports = (client) => {
             let responseMsg = await msg.reply('... Calculating ...');
             setTimeout(() => {
                 const ping = msg.createdTimestamp - responseMsg.createdTimestamp;
-                responseMsg.edit('`bot\'s` ping: ' + ping + "`ms`")
+                responseMsg.edit(`Currently: ${ping}`)
             }, 2000)
         }
     })
