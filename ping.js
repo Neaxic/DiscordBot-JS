@@ -2,10 +2,9 @@ module.exports = (client) => {
     client.on('message', async (msg) => {
         if (msg.content === ".ping") {
             msg.react('👌');
-            let responseMsg = await msg.reply('... Calculating ...');
+            var responseMsg = await msg.reply('... Calculating ...');
             setTimeout(() => {
-                var ping = msg.createdTimestamp - responseMsg.createdTimestamp;
-                responseMsg.edit(`Currently: ${ping}`)
+                responseMsg.edit(`🏓Latency is ${Date.now() - msg.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
             }, 2000)
         }
     })
