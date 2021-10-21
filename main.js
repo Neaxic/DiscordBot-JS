@@ -1,6 +1,8 @@
 const { Client, Intents, MessageEmbed, Role } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS], });
 
+const pingCheck = require('./ping')
+
 const ruleClaim = require('./embeds/rule-claiming')
 const faqClaim = require('./embeds/faq-claiming')
 const featureEmbed = require('./embeds/features')
@@ -19,6 +21,8 @@ const blacklist = require('./commands/blacklist')
 client.once('ready', () => {
     console.log("Bot-man is online");
 
+    pingCheck(client)
+
     ruleClaim(client)
     faqClaim(client)
     welcomeMsg(client)
@@ -32,14 +36,6 @@ client.once('ready', () => {
     blacklist(client)
 
 })
-
-client.on('message', async msg => {
-    if (msg.content === ".ping") {
-        let messageEmbed = await msg.reply('pong');
-        messageEmbed.react('👌');
-    }
-})
-
 
 /*
 
