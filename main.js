@@ -26,7 +26,7 @@ client.once('ready', () => {
     client.channels.cache.get("883827218923528234")
         .send(`Im somehow alive - ${Date()}`)
 */
-    pingCheck(client)
+    //pingCheck(client)
 
     ruleClaim(client)
     faqClaim(client)
