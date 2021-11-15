@@ -22,7 +22,7 @@ client.once('ready', () => {
     welcomeMsg(client)
 
     //featureEmbed(client)
-    statusEmbed(client)
+    //statusEmbed(client)
     loaderEmbed(client)
     exclusiveEmbed(client)
 
