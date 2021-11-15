@@ -1,0 +1,13 @@
+const { MessageEmbed } = require('discord.js');
+const { Permissions } = require('discord.js');
+const firstMessage = require('../first-message')
+
+const channelID = "";
+
+module.exports = (client) => {
+    client.on('message', async (msg) => {
+        if (msg.channel.id === channelId) {
+            msg.react('🔒')
+        }
+    })
+}
