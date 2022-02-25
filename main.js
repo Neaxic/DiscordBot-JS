@@ -13,7 +13,7 @@ const exclusiveEmbed = require('./embeds/exclusive')
 
 const welcomeMsg = require('./welcome-message')
 
-const ticket = require('./commands/ticket')
+//const ticket = require('./commands/ticket')
 const blacklist = require('./commands/blacklist')
 
 
@@ -26,7 +26,7 @@ client.once('ready', () => {
     client.channels.cache.get("883827218923528234")
         .send(`Im somehow alive - ${Date()}`)
 */
-    //pingCheck(client)
+    pingCheck(client)
 
     ruleClaim(client)
     faqClaim(client)
@@ -37,7 +37,7 @@ client.once('ready', () => {
     loaderEmbed(client)
     exclusiveEmbed(client)
 
-    ticket(client)
+    //ticket(client)
     blacklist(client)
 
 })
